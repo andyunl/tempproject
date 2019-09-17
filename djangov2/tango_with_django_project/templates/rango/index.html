@@ -1,0 +1,84 @@
+{% extends 'rango/base.html' %}
+{% load staticfiles %}
+{% block title_block %}
+	Index
+{% endblock %}
+{% block body_block %}
+	<div class="jumbotron">
+		<h1 class="display-3">Rango says...</h1>
+		{% if user.is_authenticated %}
+			<h1>hey there {{ user.username }}!</h1>
+		{% else %}
+			<h1>hey there partner! </h1>
+		{% endif %}
+	</div>
+	<div class="row marketing">
+		<div class="col-lg-6">
+			<h4>Most Liked Categories</h4>
+			<p>
+			{% if categories %}
+			<ul>
+				{% for category in categories %}
+				<li><a href="{% url 'show_category' category.slug %}">
+					{{ category.name }}</a></li>
+				{% endfor %}
+			</ul>
+			{% else %}
+				<strong>There are no categories present.</strong>
+			{% endif %}
+			</p>
+		</div>
+	<div class="col-lg-6">
+		<h4>Most Viewed Pages</h4>
+		<p>
+		{% if pages %}
+		<ul>
+			{% for page in pages %}
+			<li><a href="{{ page.url }}">{{ page.title }}</a></li>
+			{% endfor %}
+			</ul>
+			{% else %}
+				<strong>There are no categories present.</strong>
+			{% endif %}
+		</p>
+		</div>
+	</div>
+	<img src="{% static "images/rango.jpeg" %}" alt="Picture of Rango" />
+{% endblock %}
+
+<!----<!DOCTYPE html>
+{% load staticfiles %}
+<html>
+	<head>
+		<title>Rango</title>
+	</head>
+	<body>
+		<h1>Rango says...</h1>
+		<div>
+			{% if user.is_authenticated %}
+				howdy {{ user.username }}!
+			{% else %}
+				hey there partner!
+			{% endif %}
+		</div>
+		<div>
+			{% if categories %}
+		<ul>
+			{% for category in categories %}
+			<li>
+				<a href="{% url 'show_category' category.slug %}">{{ category.name }}</a>
+			</li>
+			{% endfor %}
+		</ul>
+		{% else %}
+			<strong>There are no categories present.</strong>
+		{% endif %}
+		</div>
+		<div>
+			<a href="/rango/add_category/">Add a New Category</a><br />
+			<a href="{% url 'about' %}">About</a>
+			<hr>
+			<img src="{% static "images/rango.jpeg" %}" alt="Picture of Rango" />
+		</div>
+	</body>
+</html>-->
